@@ -1,0 +1,6 @@
+<h1>HOME</h1>
+<%if user_signed_in? %>
+  <p><%=current_user.f_name%></p>
+  <p><%=current_user.l_name%></p>
+   <p><%=user_session%></p>
+<%end%>
