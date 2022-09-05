@@ -1,0 +1,19 @@
+
+<h1><%=params[:id]%></h1>
+<table style="width:100%">
+
+<% @comm.each do |block| %>
+  <tr>
+    <td><%= block.post_id %></td>
+    <td><%= block.description %></td>
+    <td><%= User.find(block.user_id).email %></td>
+    <%if can? :delete, block %>
+      <td> <%= button_to "Delete","/view_comment/#{block.post_id}/delete_comment/#{block.id}", method: :post %></td>
+    <%end%>
+    
+  </tr>
+<% end %>
+
+</table>
+
+<td> <%= link_to "Write a comment!","new_comment/#{params[:id]}", method: :get %></td>

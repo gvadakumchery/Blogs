@@ -1,0 +1,10 @@
+
+<h1><%=current_user.id%></h1>
+<h1><%=@ps%></h1>
+<form action="/submit_comment/<%= @ps %>" method="post">
+  <label for="title">Comment here:</label><br>
+  <hr>
+  <textarea id="description" name="description" rows="4" cols="50" > </textarea>
+  <br>
+  <input type="submit" value="Submit">
+</form>
