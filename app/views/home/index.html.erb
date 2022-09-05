@@ -1,6 +1,38 @@
-<h1>HOME</h1>
+
+
+
+<h2> Posts</h2>
+
 <%if user_signed_in? %>
   <p><%=current_user.f_name%></p>
   <p><%=current_user.l_name%></p>
-   <p><%=user_session%></p>
+  <p><%=current_user.id%></p>
+  <p><%=user_session%></p>
+  <%= link_to "Write a blog!!", post_path %>
 <%end%>
+
+<table style="width:100%">
+<tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Users email</th>
+</tr>
+<% @post.each do |block| %>
+  <tr>
+    <td><%= block.title %></td>
+    <td><%= block.description %></td>
+    <td><%= User.find(block.user_id).email %></td>
+    <td> <%=link_to "View Comments!", "view_comment/#{block.id}" %></td>
+    <% if user_signed_in? %>
+      <td> <%= link_to "Write a comment!","new_comment/#{block.id}", method: :get %></td>
+    <%end%>
+    <td>
+    <%if can? :delete, block %>
+      <%= button_to "Delete","delete_post/#{block.id}", method: :post %>
+    <%end%>
+    </td>
+    
+  </tr>
+<% end %>
+
+</table>
